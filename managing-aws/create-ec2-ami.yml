@@ -1,0 +1,14 @@
+- hosts: localhost
+  gather_facts: no
+  vars_files:
+    - awskeys.yml
+  tasks:
+    - name: Create new AMI from EC2 instance
+      ec2_ami:
+        aws_access_key: "{{ AWS_ACCESS_KEY_ID }}"
+        aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
+        ec2_region: "{{ AWS_REGION }}"
+        instance_id: YOUR_INSTANCE_ID
+        name: MyNewAMI
+        #wait: yes
+        state: present
