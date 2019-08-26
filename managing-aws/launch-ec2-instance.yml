@@ -1,0 +1,42 @@
+- hosts: localhost
+  gather_facts: no
+  vars_files:
+    - awskeys.yml
+  tasks:
+    - name: Provision/Launching a new instance
+      ec2:
+        aws_access_key: "{{ AWS_ACCESS_KEY_ID }}"
+        aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"  
+        ec2_region: "{{ AWS_REGION }}"
+        instance_type: t2.micro
+        keypair: your_keypair_name
+        image: your_ami-id #AMI ID from AWS
+        assign_public_ip: yes
+        vpc_subnet_id: your-subnet-id
+        group: demoSG
+        wait: true
+        exact_count: 1
+        count_tag: 
+          Name: Demo
+        instance_tags:
+          Name: Demo
+      register: ec2
+    - debug:
+        var: ec2
+
+    - name: add host to inventory
+      add_host:
+        hostname: '{{ item.public_ip }}'
+        groupname: demogroup
+        ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
+        ansible_ssh_private_key_file: /home/ansible/keypair.pem
+      loop: '{{ ec2.instances }}'
+
+- hosts: demogroup
+  gather_facts: no
+  remote_user: ec2-user
+  tasks:
+    - name: wait for SSH
+      wait_for_connection:
+        delay: 5
+        timeout: 90
