@@ -1,0 +1,23 @@
+- hosts: localhost
+  gather_facts: no
+  vars_files:
+    - awskeys.yml
+  vars:
+    UNIQUE_BUCKET_NAME: your-bucket-name #It should be unique globally.
+  tasks:
+    - name: Creating S3 bucket
+      aws_s3:
+        aws_access_key: "{{ AWS_ACCESS_KEY_ID }}"
+        aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
+        ec2_region: "{{ AWS_REGION }}"
+        bucket: "{{ UNIQUE_BUCKET_NAME }}"
+        mode: create
+    - name: Add a sample file to bucket
+      aws_s3:
+        aws_access_key: "{{ AWS_ACCESS_KEY_ID }}"
+        aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
+        ec2_region: "{{ AWS_REGION }}"
+        bucket: "{{ UNIQUE_BUCKET_NAME }}"
+        mode: put
+        object: /test.txt
+        src: /home/mayank/ansible/test.txt
