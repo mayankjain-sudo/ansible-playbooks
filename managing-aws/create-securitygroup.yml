@@ -1,0 +1,26 @@
+- hosts: localhost
+  gather_facts: no
+  vars_files:
+    - awskeys.yml
+  tasks:
+    - name: Creating Security Group
+      ec2_group:
+        aws_access_key: "{{ AWS_ACCESS_KEY_ID }}"
+        aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
+        ec2_region: "{{ AWS_REGION }}"
+        name: demoSG
+        description: EC2 Security Group example
+        vpc_id: your_vpc_id
+        rules:
+          - proto: tcp
+            ports:
+              - 80
+              - 443
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            to_port: 22
+            cidr_ip: 192.168.10.12/24
+        rules_egress:
+          - proto: tcp
+            from_port: 22
+            cidr_ip: 10.0.2.0/16
