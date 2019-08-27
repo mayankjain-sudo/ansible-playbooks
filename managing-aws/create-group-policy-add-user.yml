@@ -1,0 +1,16 @@
+- hosts: localhost
+  gather_facts: no
+  vars_files:
+    - awskeys.yml
+  tasks:
+    - name: Create new group with policy and add user in the group
+      iam_group:
+        aws_access_key: "{{ AWS_ACCESS_KEY_ID }}"
+        aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
+        ec2_region: "{{ AWS_REGION }}"
+        name: ansiblegroup
+        managed_policy:
+          - arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess 
+        users:
+          - ansibleuser      # created in our previous playbook or you can add user which is already created.
+        state: present
