@@ -1,0 +1,13 @@
+- hosts: localhost
+  gather_facts: no
+  vars_files:
+    - awskeys.yml
+  tasks:
+    - name: Attach Volume to ec2 instance
+      ec2_vol:
+        aws_access_key: "{{ AWS_ACCESS_KEY_ID }}"
+        aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
+        region: "{{ AWS_REGION }}"
+        instance: YOUR_INSTANCE_ID
+        id: YOUR_VOLUME_ID
+        delete_on_termination: yes
