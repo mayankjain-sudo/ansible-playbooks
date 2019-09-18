@@ -1,0 +1,12 @@
+- name: Stop Azure VM
+  hosts: localhost
+  connection: local
+  vars:
+    resource_group_name: myResourceGroup
+    vm_name: myVM
+  tasks:
+   - name: Stop virtual machine
+     azure_rm_virtualmachine:
+        resource_group: "{{ resource_group_name }}"
+        name: "{{ vm_name }}"
+        allocated: no
