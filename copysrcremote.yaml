@@ -1,0 +1,11 @@
+- hosts: localhost
+  become : yes
+  tasks:
+  - name: Ansible copy files remote to remote
+    copy:
+      src: /var/www/html/testmj
+      dest: /var/www/html/testmj_test
+      remote_src: yes
+      group : www-data
+      owner : www-data
+      mode  : 0755

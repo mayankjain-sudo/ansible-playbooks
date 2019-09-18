@@ -1,0 +1,16 @@
+- hosts: localhost
+  become: yes
+  tasks:
+  - name: ansible copy file
+    copy:
+      src: /home/mayank/Desktop/ansible/abc.conf
+      dest: /etc/apache2/sites-available/
+      backup: yes
+
+  - name: ansible enable site
+    command: a2ensite abc.conf
+  - name: ensure apache restart
+    service:
+      name: apache2
+      state: restarted
+      enabled: yes

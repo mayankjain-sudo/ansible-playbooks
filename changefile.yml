@@ -1,0 +1,11 @@
+- hosts: localhost
+  become: yes
+  tasks:
+  - name: ansible copy file with backup
+    copy:
+      src: /home/mayank/Desktop/test/index.html
+      dest: /var/www/html/
+      backup: yes
+      group : www-data
+      owner : www-data
+      mode  : 0755

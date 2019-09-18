@@ -1,0 +1,6 @@
+- hosts : localhost
+  tasks:
+    - name: Check Time
+      command: "date"
+      register: command_output
+    - debug: msg="{{command_output.stdout.split('\n')}}"

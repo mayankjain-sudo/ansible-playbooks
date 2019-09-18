@@ -1,0 +1,6 @@
+- hosts : localhost
+  tasks:
+    - name: Check Disk Space
+      command: "df -Th"
+      register: command_output
+    - debug: msg="{{command_output.stdout.split('\n')}}"
