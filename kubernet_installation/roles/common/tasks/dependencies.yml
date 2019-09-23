@@ -1,0 +1,33 @@
+---
+- name: install Docker on all machine
+  apt:
+    name: docker.io
+    state: present
+    update_cache: true
+
+- name: Install APT Transport HTTPS on all machine
+  apt:
+    name: apt-transport-https
+    state: present
+  
+- name: Add kubernet key 
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg     
+    state: present
+   
+- name: Add kubernet repository
+  apt_repository:
+          repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+          state: present
+          filename: 'kubernetes'
+    
+- name: Install kuberlet
+  apt:
+    name: kubelet=1.14.0-00
+    state: present
+    update_cache: yes
+
+- name: install kubeadm
+  apt:
+    name: kubeadm=1.14.0-00
+    state: present    

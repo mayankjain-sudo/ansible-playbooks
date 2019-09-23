@@ -1,0 +1,5 @@
+---
+- import_playbook: master.yml
+- import_playbook: worker.yml
+- import_playbook: workerconfig.yml
+- import_playbook: testing.yml  

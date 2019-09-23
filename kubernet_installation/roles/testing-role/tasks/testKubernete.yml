@@ -1,0 +1,12 @@
+---      
+- name: Deploy the container on kubernet with name nginx
+  shell: kubectl create deployment nginx --image=nginx
+
+- name: Create a service name nginx and expose to publicly
+  shell: kubectl expose deploy nginx --port 80 --target-port 80 --type NodePort
+
+- name: Check the Service status
+  shell: kubectl get services
+  register: servicelist
+      
+- debug: var=servicelist.stdout_lines

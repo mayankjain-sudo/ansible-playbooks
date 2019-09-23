@@ -1,0 +1,4 @@
+---
+  # tasks file for master-role
+- include: installingKubernete.yml
+- include: configuring.yml
