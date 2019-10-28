@@ -1,0 +1,30 @@
+---
+- name: Install latest version of "openjdk-7-jdk" ignoring "install-recommends"
+  apt:
+    name: openjdk-7-jdk
+    state: latest
+    install_recommends: no
+
+- name: Install "Mysql Client"
+  apt:
+    name: mysql-client-5.5
+    state: latest
+    install_recommends: no
+
+- name: Install "Mysql Client"
+  apt:
+    name: mysql-client
+    state: latest
+    install_recommends: no
+  
+- name: Install zip
+  apt:
+    name: zip
+    state: latest
+    install_recommends: no  
+  
+- name: Install unzip
+  apt:
+    name: unzip
+    state: latest
+    install_recommends: no

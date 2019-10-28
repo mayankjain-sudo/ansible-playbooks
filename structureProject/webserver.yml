@@ -1,0 +1,6 @@
+---
+- hosts: webserver1
+  become: yes
+
+  roles:
+    - web

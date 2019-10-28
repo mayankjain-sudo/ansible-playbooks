@@ -1,0 +1,7 @@
+---
+- name: Enabling Apache Mods
+  command: a2ensite {{ vault_domain }}
+  #meta: flush_handlers
+
+- name: force all notified handlers to run at this point.
+  meta: flush_handlers  

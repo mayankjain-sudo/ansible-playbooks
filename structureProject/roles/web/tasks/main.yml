@@ -1,0 +1,10 @@
+---
+# Taks for webserver configuration
+##- include: installation.yml
+#- include: createWorkerFile.yml
+- include: addWorker.yml
+##- include: workerFileTemplate.yml
+##- include: settingWorkerFilePath.yml
+- include: settingVHostfile.yml
+- include: enablingModSite.yml
+- include: updatingPackages.yml

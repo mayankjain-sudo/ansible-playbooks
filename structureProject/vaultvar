@@ -1,0 +1,23 @@
+Application Server Variable
+
+vault_ansible_user: labadmin
+vault_ansible_password: uChtnUDb&usJrSELbJTsf
+vault_client_rmqusername: adminclient
+vault_client_rmqpassword: password
+vault_client_vh: adminclientVH
+vault_client_ex: adminclientEX
+vault_rbadmin_username: admin
+vault_rbadmin_password: admin
+vault_rbadmin_vh: adminVH
+
+===============================
+WebServer Variable
+
+vault_ansible_user: devadmin
+vault_ansible_password: hawEwYZvjneTXWUggYe8q
+vault_worker_name: devworker
+vault_worker_host: YOUR_IP_ADDRESS
+vault_worker_port: 8009
+vault_instance_name: mayanktest
+vault_url: mayanktest.com
+vault_domain: mayanktest.com

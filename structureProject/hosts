@@ -1,0 +1,28 @@
+[appserver]
+test.centralindia.cloudapp.azure.com 
+
+[appserver:vars]
+ansible_user={{ vault_ansible_user }}
+ansible_password={{ vault_ansible_password }}
+
+[webserver1]
+testwebserver1.centralindia.cloudapp.azure.com
+
+[webserver1:vars]
+ansible_user={{ vault_ansible_user1 }}
+ansible_password={{ vault_ansible_password1 }}
+
+[webserver2]
+testwebserver2.centralindia.cloudapp.azure.com
+
+[webserver2:vars]
+ansible_user={{ vault_ansible_user2 }}
+ansible_password={{ vault_ansible_password2 }}
+
+
+[webservers:children]
+webserver1
+webserver2
+
+
+

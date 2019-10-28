@@ -1,0 +1,16 @@
+# Here are variables related to theRabbitMQ Admin
+
+rbadmin_username: "{{ vault_rbadmin_username }}"
+rbadmin_password: "{{ vault_rbadmin_password }}"
+rbadmin_vh: "{{ vault_rbadmin_vh }}"
+
+# This will configure a username and password for rabbitmq User:
+
+client_rmqusername: "{{ vault_client_rmqusername }}"
+client_rmqpassword: "{{ vault_client_rmqpassword }}"
+client_vh: "{{ vault_client_vh }}"
+client_ex: "{{ vault_client_ex }}"
+
+#Server Username for owenship and group
+
+server_username: "{{ vault_ansible_user }}"

@@ -1,0 +1,57 @@
+<VirtualHost *:80>
+
+        ServerName {{ vault_url }}
+        ServerAlias www.{{ vault_url }}
+
+        RewriteEngine on
+        RewriteLog logs/apache-mod_rewrite
+        RewriteRule ^/rest/(.*)$ /{{ vault_instance_name }}/rest/$1 [L,PT]
+        RewriteRule ^/oauth/(.*)$ /{{ vault_instance_name }}/oauth/$1 [L,PT]
+        RewriteRule ^/logout /{{ vault_instance_name }}/logout [L,PT]
+        RewriteRule ^/*.jsp/(.*)$ /{{ vault_instance_name }}/*.jsp/$1 [L,PT]
+        RewriteRule ^/resources/images/uploads/PERSON/(.*)$ /{{ vault_instance_name }}/resources/images/uploads/PERSON/$1 [L,PT]
+   
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html/{{ vault_instance_name }}/
+
+    ErrorLog ${APACHE_LOG_DIR}/{{ vault_instance_name }}.error.log
+    CustomLog ${APACHE_LOG_DIR}/{{ vault_instance_name }}.access.log combined
+
+
+    #For Caching
+        CacheQuickHandler off
+        CacheLock on
+        CacheLockPath /tmp/mod_cache-lock
+        CacheLockMaxAge 5
+        CacheIgnoreHeaders Set-Cookie
+
+    <Location />
+
+        CacheEnable disk
+        CacheHeader on
+        CacheDefaultExpire 600
+        CacheMaxExpire 86400
+        CacheLastModifiedFactor 0.5
+    </Location>
+
+        # JkMount /tomcat-demo* worker1
+
+        # Send JSPs for context /examples to worker named worker1
+
+        JkMount /{{ vault_instance_name }}/*.*jsp worker1
+
+# Other directives here
+    <Directory />
+        Options FollowSymLinks
+        AllowOverride None
+    </Directory>
+  <Directory /var/www/html/{{ vault_instance_name }}>
+         Options Indexes FollowSymLinks MultiViews
+         AllowOverride All
+         Order allow,deny
+         allow from all
+    </Directory>
+
+AccessFileName .htaccess
+
+</VirtualHost>

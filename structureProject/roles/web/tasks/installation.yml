@@ -1,0 +1,22 @@
+---
+- name: Installing Apache2  WebServer and php5
+  apt: 
+    name: "{{ item }}" 
+    update_cache: yes 
+    state: present
+  with_items:
+    - apache2
+    - php5
+    - php5-gd
+    - php5-mcrypt
+    - php5-xmlrpc
+    - php5-curl
+    - php5-intl
+    - php5-mysql
+    - php-soap
+    - libapache2-mod-jk
+  notify:
+    - "Apache Restart"
+
+- name: force all notified handlers to run at this point.
+  meta: flush_handlers

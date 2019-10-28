@@ -1,0 +1,6 @@
+# Define 1 real worker using ajp13
+worker.list={{ vault_worker_name }}
+# Set properties for worker (ajp13)
+worker.{{ vault_worker_name }}.type=ajp13
+worker.{{ vault_worker_name }}.host={{ vault_worker_host }}
+worker.{{ vault_worker_name }}.port={{ vault_worker_port }}

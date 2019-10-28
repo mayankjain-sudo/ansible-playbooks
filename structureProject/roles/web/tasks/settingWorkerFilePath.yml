@@ -1,0 +1,6 @@
+---
+- name: JkWorkersFile updating
+  replace:
+      path: /etc/apache2/mods-available/jk.conf
+      regexp: '   JkWorkersFile.*$'
+      replace: "   JkWorkersFile /etc/apache2/workers.properties"

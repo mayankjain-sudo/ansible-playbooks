@@ -1,0 +1,15 @@
+---
+- name: Create directory
+  file:
+    path: /home/mayank/uploads
+    state: directory
+    owner: "{{ server_username }}"
+    group: "{{ server_username }}"
+    recurse: yes
+
+- name: Create directory
+  file:
+    path: transfer
+    state: directory
+    owner: "{{ server_username }}"
+    group: "{{ server_username }}"

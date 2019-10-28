@@ -1,0 +1,66 @@
+---
+- name: install package RabbitMQ-Server
+  apt: 
+    name: "{{ item }}" 
+    update_cache: yes 
+    state: present
+  with_items:
+    - rabbitmq-server
+
+- name: enable rabbitmq plugins
+  rabbitmq_plugin: 
+    names: rabbitmq_management,rabbitmq_tracing,rabbitmq_federation 
+    state: enabled
+  notify: 
+    - "restart rabbitmq"
+
+- name: add Admin users
+  rabbitmq_user: 
+    user: "{{ rbadmin_username }}"
+    password: "{{ rbadmin_password }}" 
+    tags: administrator,"{{ rbadmin_username }}" 
+    vhost: / 
+    configure_priv: .* 
+    write_priv: .* 
+    read_priv: .* 
+    state: present
+
+- name: remove default guest user
+  rabbitmq_user: 
+    user: guest 
+    state: absent
+
+- name: ensure vhost adminVH is present
+  rabbitmq_vhost: 
+    name: "{{ rbadmin_vh }}" 
+    state: present
+
+- name: Creating vhost for client user serouserVH
+  rabbitmq_vhost: 
+    name: "{{ client_vh }}"
+    state: present    
+
+- name: add new Client users with management tags
+  rabbitmq_user: 
+    user: "{{ client_rmqusername }}"
+    password: "{{ client_rmqpassword }}" 
+    tags: management
+    vhost: "{{ client_vh }}" 
+    configure_priv: .* 
+    write_priv: .* 
+    read_priv: .* 
+    state: present
+  notify: 
+    - "restart rabbitmq"
+
+- name: force all notified handlers to run at this point.
+  meta: flush_handlers
+
+- name: Creating exchange for client user serouser
+  rabbitmq_exchange:
+    name: "{{ client_ex }}"
+    vhost: "{{ client_vh }}"
+    type: direct
+    state: present
+    login_user: "{{ client_rmqusername }}"
+    login_password: "{{ client_rmqpassword }}"

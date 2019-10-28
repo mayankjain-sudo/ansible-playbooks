@@ -1,0 +1,12 @@
+---
+- name: Add worker properties at EOF
+  blockinfile:
+    path: /etc/apache2/workers.properties
+    marker: ""
+    block: |
+      # Define 1 real worker using ajp13
+      worker.list={{ vault_worker_name }}
+      worker.{{ vault_worker_name }}.type=ajp13
+      worker.{{ vault_worker_name }}.host={{ vault_worker_host }}
+      worker.{{ vault_worker_name }}.port={{ vault_worker_port }}
+    backup: yes  

@@ -1,0 +1,7 @@
+---
+- name: Sending war file to server
+  copy:
+    src: test.war
+    dest: transfer
+    owner: "{{ server_username }}"
+    group: "{{ server_username }}"

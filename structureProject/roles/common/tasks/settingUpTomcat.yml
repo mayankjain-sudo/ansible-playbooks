@@ -1,0 +1,16 @@
+---
+- name: Sending tomcat zip file to server
+  copy:
+    src: tomcat.zip
+    dest: transfer
+    owner: "{{ server_username }}"
+    group: "{{ server_username }}"
+
+- name: unzip the tomcat
+  unarchive:
+    src: transfer/tomcat.zip
+    dest: /home/mayank/
+    copy: no
+    owner: "{{ server_username }}"
+    group: "{{ server_username }}"
+    mode: 0755

@@ -1,0 +1,10 @@
+---
+- include: updatingPackages.yml
+- include: settingUpTimeZone.yml
+- include: installation.yml 
+- include: rabbitmqInstallation.yml
+- include: createDirStructure.yml
+- include: settingUpTomcat.yml
+- include: settingUpAppFile.yaml
+- include: updatingPackages.yml
+                            

@@ -1,0 +1,5 @@
+---
+#- name: Creates the worker property file
+- template: 
+    src: vhostfile.j2
+    dest: /etc/apache2/sites-available/{{ vault_instance_name }}.mayanktest.conf
