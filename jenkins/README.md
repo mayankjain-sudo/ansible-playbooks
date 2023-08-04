@@ -18,7 +18,7 @@ Dependencies
 ------------
 
 python\
-pip\ 
+pip\
 ansible.posix.firewalld module can install using below command\ 
 #ansible-galaxy collection install ansible.posix
 
@@ -27,10 +27,10 @@ Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
----
-- name: jenkins Playbook
-  hosts: 127.0.0.1
-  tasks:
-    - name: Include jenkins
-      ansible.builtin.include_role:
-        name: jenkins
+    ---
+    - name: jenkins Playbook
+      hosts: 127.0.0.1
+      tasks:
+        - name: Include jenkins
+          ansible.builtin.include_role:
+          name: jenkins
