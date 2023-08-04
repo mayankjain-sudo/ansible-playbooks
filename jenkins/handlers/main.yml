@@ -1,0 +1,14 @@
+---
+# handlers file for jenkins
+
+- name: restart jenknis
+  ansible.builtin.service:
+    name: jenkins
+    state: restarted
+  become: true
+
+- name: restart firewalld
+  ansible.builtin.service:
+    name: firewalld.service
+    state: restarted
+  become: true

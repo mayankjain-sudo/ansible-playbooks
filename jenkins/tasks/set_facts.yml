@@ -1,0 +1,11 @@
+---
+
+- name: set_facts | Setting RedHat Facts
+  ansible.builtin.set_fact:
+    jenkins_package: jenkins
+    jenkins_service: jenkins
+    jenkins_repo: https://pkg.jenkins.io/redhat-stable/jenkins.repo
+    jenkins_key: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+    java_version: java-11-openjdk-devel
+    firewalld_service: firewalld.service
+  when: ansible_os_family == "RedHat"

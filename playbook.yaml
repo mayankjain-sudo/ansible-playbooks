@@ -1,0 +1,7 @@
+---
+- name: jenkins Playbook
+  hosts: 127.0.0.1
+  tasks:
+    - name: Include jenkins
+      ansible.builtin.include_role:
+        name: jenkins

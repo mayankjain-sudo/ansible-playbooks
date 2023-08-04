@@ -1,0 +1,58 @@
+---
+
+# install jenkins for RHEL
+
+- name: redhat | Download Long Term Jenkins release
+  get_url:
+    url: "{{ jenkins_repo }}"
+    dest: /etc/yum.repos.d/jenkins.repo
+  become: true
+  register: result
+  until: result is successful
+  
+- name: redhat | Importing the key 
+  ansible.builtin.rpm_key:
+    state: present
+    key: "{{ jenkins_key }}"
+  become: true
+
+- name: redhat | update the system
+  ansible.builtin.yum:
+    name: "*"
+    state: latest
+  become: true
+
+- name: redhat | install java for jenkins 
+  ansible.builtin.yum: 
+    name: "{{ java_version }}"
+    state: present
+  become: true
+
+- name: redhat | Installing jenkins 
+  ansible.builtin.yum:
+    name: "{{ jenkins_package }}"
+    state: present
+  become: true
+  register: result
+  until: result is successful
+
+- name: rhel | daemon-reload to pick up config changes
+  ansible.builtin.systemd:
+      daemon_reload: yes
+  become: true
+
+- name: rhel | Start jenkins
+  ansible.builtin.systemd:
+      name: "{{ jenkins_service }}"
+      state: started
+  become: true
+
+- name: rhel | Open Firewall Port
+  ansible.posix.firewalld:
+    port: 8080/tcp
+    permanent: true
+    state: enabled
+    zone: public
+    immediate: true
+  become: true
+  notify: "{{ firewalld_service }}"
