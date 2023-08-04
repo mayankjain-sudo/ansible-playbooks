@@ -19,7 +19,7 @@ Dependencies
 
 python\
 pip\
-ansible.posix.firewalld module can install using below command\ 
+ansible.posix.firewalld module can install using below command\
 #ansible-galaxy collection install ansible.posix
 
 Example Playbook
