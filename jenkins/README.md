@@ -5,8 +5,9 @@ jenkins
 
 Requirements
 ------------
-RHEL9 OS
-Required Ansible package on OS. Refer this https://medium.com/@jaine.mayank/how-to-install-ansible-on-rhel9-step-by-step-b462237f229e to install the Ansible
+Required RHEL9 OS\
+Ansible package\
+Refer this https://medium.com/@jaine.mayank/how-to-install-ansible-on-rhel9-step-by-step-b462237f229e to install the Ansible
 
 Role Variables
 --------------
@@ -16,10 +17,10 @@ A description of the settable variables for this role should go here, including 
 Dependencies
 ------------
 
-python
-pip 
-ansible.posix.firewalld module can install using below command 
-## ansible-galaxy collection install ansible.posix
+python\
+pip\ 
+ansible.posix.firewalld module can install using below command\ 
+#ansible-galaxy collection install ansible.posix
 
 Example Playbook
 ----------------
