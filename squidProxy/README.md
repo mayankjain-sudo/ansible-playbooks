@@ -6,7 +6,7 @@ Ansible Role to install and configure Squid Proxy on RHEL9
 Requirements
 ------------
 
-- Linux OS recommended RHEL8 or RHEL9\n
+- Linux OS recommended RHEL8 or RHEL9
 - Ansible Package installed on OS
 
 Role Variables
