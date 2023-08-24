@@ -1,0 +1,17 @@
+---
+# tasks file for squidProxy
+
+- name: Set facts
+  ansible.builtin.include_tasks: set_facts.yaml
+
+- name: Execute Debian tasks
+  ansible.builtin.include_tasks: debian.yaml
+  when: ansible_os_family == "Debian"
+
+- name: Execute RHEL tasks
+  ansible.builtin.include_tasks: rhel.yaml
+  when: ansible_os_family == "RedHat"
+
+- name: Configure Squid
+  ansible.builtin.include_tasks: config_squid.yaml
+

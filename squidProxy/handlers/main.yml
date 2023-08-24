@@ -1,0 +1,31 @@
+---
+# handlers file for squidProxy
+- name: restart squid
+  ansible.builtin.service:
+    name: squid
+    state: restarted
+  become: true
+
+- name: restart squid3
+  ansible.builtin.service:
+    name: squid3
+    state: restarted
+  become: true
+
+- name: reload haproxy
+  ansible.builtin.service:
+    name: haproxy
+    state: reloaded
+  become: true
+
+- name: restart haproxy
+  ansible.builtin.service:
+    name: haproxy
+    state: restarted
+  become: true
+
+- name: restart firewalld
+  ansible.builtin.service:
+    name: firewalld.service
+    state: restarted
+  become: true
