@@ -1,0 +1,43 @@
+---
+
+# - name: URL to whitelist array in https
+#   ansible.builtin.set_fact:
+#     https_whitelist: "{{ lookup('file', 'files/http/http_whitelist' ).splitlines() }}"
+#   with_fileglob:
+#     - files/http/http_whitelist
+#   register: https_whitelist
+
+# - debug:
+#     msg: "{{ https_urls }}"
+
+- name: config_squid | Configuring Squid
+  ansible.builtin.template:
+    src: "{{ item.source }}"
+    dest: "{{ squid_root_dir }}/{{ item.name }}"
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+  loop: "{{ squid_config_files }}"
+  become: true
+  notify: "restart {{ squid_service }}"
+
+- name: Copy whitelist URL files
+  ansible.builtin.template:
+    src: "{{ item.source }}"
+    dest: "{{ squid_root_dir }}/{{ item.name }}"
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+  loop: "{{ squid_whitelist_files }}"
+  become: true
+  notify: "restart {{ squid_service }}"
+
+- name: rhel | Open Firewall Port
+  ansible.posix.firewalld:
+    port: 3128/tcp
+    permanent: true
+    state: enabled
+    zone: public
+    immediate: true
+  become: true
+  notify: "{{ firewalld_service }}"
