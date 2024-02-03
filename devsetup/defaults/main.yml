@@ -1,0 +1,11 @@
+---
+# defaults file for DevSetup
+#
+req_packages:
+  - git
+  - nodejs
+  - python3
+
+pip_packages:
+  - boto3 
+    

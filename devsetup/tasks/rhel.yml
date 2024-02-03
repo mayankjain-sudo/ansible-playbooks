@@ -1,6 +1,6 @@
 ---
 
-# install jenkins for RHEL
+# DevSetup for RHEL
 
 - name: redhat | Download Long Term Jenkins release
   get_url:
@@ -16,11 +16,11 @@
     key: "{{ jenkins_key }}"
   become: true
 
-- name: redhat | update the system
-  ansible.builtin.yum:
-    name: "*"
-    state: latest
-  become: true
+    #- name: redhat | update the system
+    #  ansible.builtin.yum:
+    #    name: "*"
+    #    state: latest
+    #become: true
 
 - name: redhat | install java for jenkins 
   ansible.builtin.yum: 
@@ -50,9 +50,20 @@
 - name: rhel | Open Firewall Port
   ansible.posix.firewalld:
     port: 8080/tcp
-    permanent: yes
+    permanent: true
     state: enabled
     zone: public
-    immediate: yes
+    immediate: true
   become: true
   notify: "{{ firewalld_service }}"
+
+- name: rhel | Install git
+  ansible.builtin.yum:
+    name: "{{item}}"
+    state: present
+  with_items: "{{ req_packages }}" 
+
+- name: rhel | Install pip packages
+  ansible.builtin.pip:
+    name: "{{item}}"
+  with_items: "{{ pip_packages }}"

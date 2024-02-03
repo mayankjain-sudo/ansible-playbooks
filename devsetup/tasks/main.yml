@@ -1,0 +1,12 @@
+---
+# tasks file for jenkins
+- name: Set facts
+  ansible.builtin.include_tasks: set_facts.yml
+
+- name: Execute Debian tasks
+  ansible.builtin.include_tasks: debian.yml
+  when: ansible_os_family == "Debian"
+
+- name: Execute RHEL tasks
+  ansible.builtin.include_tasks: rhel.yml
+  when: ansible_os_family == "RedHat"
