@@ -1,7 +1,7 @@
 Role Name
 =========
 
-jenkins
+DevSetup
 
 Requirements
 ------------
@@ -28,9 +28,9 @@ Example Playbook
 Including an example of how to use your role:
 
     ---
-    - name: jenkins Playbook
+    - name: devsetup Playbook
       hosts: 127.0.0.1
       tasks:
-        - name: Include jenkins
+        - name: Include devsetup
           ansible.builtin.include_role:
-          name: jenkins
+          name: devsetup
