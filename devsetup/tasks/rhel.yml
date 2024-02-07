@@ -1,6 +1,20 @@
 ---
 
 # DevSetup for RHEL
+#
+- name: rhel | Install git
+  ansible.builtin.yum:
+    name: "{{item}}"
+    state: present
+  with_items: "{{ req_packages }}"
+
+- name: rhel | Install pip packages
+  ansible.builtin.pip:
+    name: "{{item}}"
+  with_items: "{{ pip_packages }}"
+
+- name: Install role from Ansible Galaxy
+  ansible.builtin.command: ansible-galaxy collection install ansible.posix
 
 - name: redhat | Download Long Term Jenkins release
   get_url:
@@ -57,13 +71,3 @@
   become: true
   notify: "{{ firewalld_service }}"
 
-- name: rhel | Install git
-  ansible.builtin.yum:
-    name: "{{item}}"
-    state: present
-  with_items: "{{ req_packages }}" 
-
-- name: rhel | Install pip packages
-  ansible.builtin.pip:
-    name: "{{item}}"
-  with_items: "{{ pip_packages }}"
