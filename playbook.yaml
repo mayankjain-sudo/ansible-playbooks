@@ -1,6 +1,9 @@
 ---
-- name: jenkins Playbook
-  hosts: 127.0.0.1
+- name: devSetup Playbook
+  hosts: all
+  become: true
+  vars:
+    ansible_become_pass: "{{ ansible_sudo_password }}"
   tasks:
     - name: Include devsetup
       ansible.builtin.include_role:

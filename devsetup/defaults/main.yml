@@ -5,6 +5,8 @@ req_packages:
   - git
   - nodejs
   - python3
+  - python3-pip
+  - ansible-core
 
 pip_packages:
   - boto3 
